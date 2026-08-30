@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* 色は2色まで。ベース＝生成り、文字＝濃い墨、差し色＝深緑 */
+:root {
+  --background: #faf9f6;
+  --foreground: #1c2321;
+  --muted: #5c6461;
+  --line: #e2e0d9;
+  --accent: #2d5741;
+  --accent-soft: #eef2ee;
+  --card: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-card: var(--card);
+  --font-sans: var(--font-noto-sans-jp);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+  line-height: 1.9;
+  font-feature-settings: "palt";
+}
+
+/* 見出しは行間を詰める */
+h1, h2, h3 {
+  line-height: 1.5;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
