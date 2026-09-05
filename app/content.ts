@@ -1,10 +1,21 @@
 // サイトに出す文言はすべてここに集約する。
 // 文面の正本は ~/Projects/案件応募/ の各mdファイル。修正はまずそちらを直すこと。
 
-/** 未設定のうちは公開しない。LINE公式アカウント開設後に差し替える */
+/**
+ * 問い合わせ先の設定。
+ * 未設定（PLACEHOLDER のまま）のチャンネルは、サイト上に表示されない。
+ * → LINEだけ用意できた段階で公開でき、フォームは後から足せる。
+ * 両方 PLACEHOLDER のままだと問い合わせ手段がゼロになるので、
+ *   npm run check で公開前に検出する。
+ */
+
+/** LINE公式アカウントの友だち追加URL（https://lin.ee/xxxxx） */
 export const LINE_URL = "https://lin.ee/PLACEHOLDER";
 /** Formspree のフォームID（https://formspree.io/f/xxxxxxxx の xxxxxxxx 部分） */
 export const FORMSPREE_ID = "PLACEHOLDER";
+
+export const hasLine = !LINE_URL.includes("PLACEHOLDER");
+export const hasForm = !FORMSPREE_ID.includes("PLACEHOLDER");
 
 export const hero = {
   headline: "毎日くり返している手作業を\nやらなくていい形にします。",

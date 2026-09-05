@@ -36,14 +36,16 @@ Next.js 16 (App Router) / TypeScript / Tailwind CSS v4 / Vercel。
 色は2色まで（生成り `--background` ＋ 深緑 `--accent`）。フォントは Noto Sans JP。
 スマホ表示が最優先。地方の経営者はほぼスマホで見る。
 
-## 公開前に必ず埋めるもの
+## 問い合わせ先の設定
 
-`app/content.ts` の先頭2つが `PLACEHOLDER` のままだと問い合わせが機能しない。
+`app/content.ts` の `LINE_URL` / `FORMSPREE_ID`。
 
-- `LINE_URL` … LINE公式アカウントの友だち追加URL（`https://lin.ee/xxxxx`）
-- `FORMSPREE_ID` … Formspree のフォームID
+- **`PLACEHOLDER` のままのチャンネルは、サイトに表示されない。**
+  片方だけ用意できた段階で公開でき、もう片方は後から足せる
+- 両方が未設定だと問い合わせ手段がゼロになるので `npm run check` で止まる
+- LINE公式アカウントの手順は `~/Projects/案件応募/2026-08-30_LINE公式アカウント開設手順.md`
 
-手順は `~/Projects/案件応募/2026-08-30_LINE公式アカウント開設手順.md`。
+**公開を遅らせないことを優先する。** 先に埋まった方で公開し、あとから追加する。
 
 ## デモリンクの方針
 
@@ -57,5 +59,6 @@ Next.js 16 (App Router) / TypeScript / Tailwind CSS v4 / Vercel。
 
 ```bash
 npm run dev     # localhost:3000
+npm run check   # 問い合わせ先が設定されているか確認
 npm run build   # 公開前に必ず通す
 ```

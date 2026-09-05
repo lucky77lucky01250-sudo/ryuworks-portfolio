@@ -1,6 +1,8 @@
 import {
   LINE_URL,
   FORMSPREE_ID,
+  hasLine,
+  hasForm,
   hero,
   capabilities,
   liveWorks,
@@ -102,19 +104,25 @@ export default function Home() {
           {hero.badge}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={LINE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded bg-accent px-6 py-3.5 text-center font-bold text-white"
-          >
-            LINEで相談する
-          </a>
+          {hasLine && (
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded bg-accent px-6 py-3.5 text-center font-bold text-white"
+            >
+              LINEで相談する
+            </a>
+          )}
           <a
             href="#contact"
-            className="rounded border border-accent px-6 py-3.5 text-center font-bold text-accent"
+            className={`rounded px-6 py-3.5 text-center font-bold ${
+              hasLine
+                ? "border border-accent text-accent"
+                : "bg-accent text-white"
+            }`}
           >
-            フォームから相談する
+            相談してみる
           </a>
         </div>
       </section>
@@ -204,6 +212,7 @@ export default function Home() {
           note="まだ形になっていない段階のご相談で構いません。「これは自動化できるのか」を聞くだけでも大丈夫です。"
         />
 
+        {hasLine && (
         <div className="rounded-lg border border-accent/40 bg-accent-soft p-5 sm:p-7">
           <h3 className="font-bold">LINEで送る（いちばん早いです）</h3>
           <p className="mt-2 text-[15px] text-muted">
@@ -218,11 +227,13 @@ export default function Home() {
             LINEで相談する
           </a>
         </div>
+        )}
 
+        {hasForm && (
         <form
           action={`https://formspree.io/f/${FORMSPREE_ID}`}
           method="POST"
-          className="mt-5 rounded-lg border border-line bg-card p-5 sm:p-7"
+          className={`rounded-lg border border-line bg-card p-5 sm:p-7 ${hasLine ? "mt-5" : ""}`}
         >
           <h3 className="font-bold">フォームから送る</h3>
           <div className="mt-5 space-y-4">
@@ -265,6 +276,7 @@ export default function Home() {
             {profile.availability}お返事までお時間をいただくことがあります。
           </p>
         </form>
+        )}
       </section>
 
       <footer className="mt-20 border-t border-line pt-6 text-xs text-muted">
