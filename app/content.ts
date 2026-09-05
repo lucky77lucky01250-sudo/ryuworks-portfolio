@@ -12,7 +12,7 @@
 /** LINE公式アカウントの友だち追加URL（https://lin.ee/xxxxx） */
 export const LINE_URL = "https://lin.ee/PLACEHOLDER";
 /** Formspree のフォームID（https://formspree.io/f/xxxxxxxx の xxxxxxxx 部分） */
-export const FORMSPREE_ID = "PLACEHOLDER";
+export const FORMSPREE_ID = "xbgjargn";
 
 export const hasLine = !LINE_URL.includes("PLACEHOLDER");
 export const hasForm = !FORMSPREE_ID.includes("PLACEHOLDER");
