@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   LINE_URL,
   FORMSPREE_ID,
@@ -52,6 +53,34 @@ function WorkCard({
           <dd className="mt-1 font-medium">{work.result}</dd>
         </div>
       </dl>
+
+      {work.images && work.images.length > 0 && (
+        <div
+          className={`mt-6 grid gap-4 ${
+            work.images.length > 1 ? "sm:grid-cols-2" : "grid-cols-1"
+          }`}
+        >
+          {work.images.map((img) => (
+            <figure key={img.src}>
+              <a href={img.src} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={img.w}
+                  height={img.h}
+                  className="w-full rounded border border-line"
+                  sizes="(max-width: 640px) 100vw, 350px"
+                />
+              </a>
+              {img.caption && (
+                <figcaption className="mt-2 text-xs text-muted">
+                  {img.caption}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      )}
 
       {work.demo && (
         <p className="mt-5">

@@ -54,6 +54,14 @@ export const capabilities: Capability[] = [
   },
 ];
 
+export type WorkImage = {
+  src: string;
+  alt: string;
+  w: number;
+  h: number;
+  caption?: string;
+};
+
 export type Work = {
   id: string;
   title: string;
@@ -64,6 +72,7 @@ export type Work = {
   tech: string;
   demo?: { label: string; url: string };
   featured?: boolean;
+  images?: WorkImage[];
 };
 
 /** 第1部：実際に動いているもの */
@@ -80,6 +89,22 @@ export const liveWorks: Work[] = [
     result:
       "宮崎県内の繁殖農家2戸に導入し、現在も使われています。発情の見逃しと分娩事故を減らすことが目的で、パソコン管理からの時間短縮も伴いますが、本当の効果は経営面にあります。発情を1回見逃せば分娩は3週間遅れ、それがそのまま1頭あたりの年間収益に響くためです。",
     tech: "Next.js / TypeScript / Supabase / Vercel（PWA）",
+    images: [
+      {
+        src: "/hanshoku-list.jpg",
+        alt: "繁殖牛管理アプリの一覧画面。サイクル順に並び、対応が遅れている牛に警告が出ている",
+        w: 750,
+        h: 1513,
+        caption: "サイクル順に自動で並ぶ。遅れは赤で警告",
+      },
+      {
+        src: "/hanshoku-detail.jpg",
+        alt: "繁殖牛管理アプリの詳細画面。発情確認・種付け・妊娠鑑定・分娩の進み具合が図で出ている",
+        w: 750,
+        h: 1526,
+        caption: "今どの段階かが一目で分かる",
+      },
+    ],
   },
   {
     id: "work-a2",
@@ -91,6 +116,15 @@ export const liveWorks: Work[] = [
     result:
       "1件5分かかっていた入力が、LINEを1行送る十数秒になりました。毎朝の自動通知によって、予定の見落としがなくなりました。",
     tech: "LINE Messaging API / Python / Google Calendar API / Render / GitHub Actions",
+    images: [
+      {
+        src: "/line-notify.jpg",
+        alt: "LINEに毎朝7時、その日と今週の予定が自動で届いている画面",
+        w: 750,
+        h: 535,
+        caption: "毎朝7時に自動で届く（予定名はぼかしています）",
+      },
+    ],
   },
   {
     id: "work-a3",
