@@ -190,7 +190,10 @@ export const caseWorks: Work[] = [
     result:
       "総務への定型質問が大幅に減ります。社員側も、聞きに行く手間と気まずさがなくなります。（1日5件 × 5分 ＝ 約25分/日。聞きに行く側の移動時間は別）",
     tech: "Python / Slack API / ベクトル検索 / Claude API",
-    demo: { label: "実際に動くものを見る", url: "https://case7-rag-slack.vercel.app" },
+    demo: {
+      label: "検証結果を見る（精度の実測値つき）",
+      url: "https://case7-rag-slack.vercel.app",
+    },
   },
   {
     id: "work-b3",
