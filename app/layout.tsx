@@ -13,12 +13,28 @@ export const metadata: Metadata = {
   title: "押田竜太 / RyuWorks｜毎日くり返している手作業を、やらなくていい形にします",
   description:
     "宮崎県で畜産の現場に18年。現場を知ったうえで、LINE・Slack・Googleと業務をつなぐ仕組みを自分で作ります。自作の繁殖管理アプリは県内の畜産農家で稼働中。",
+  metadataBase: new URL("https://ryuworks-portfolio.vercel.app"),
   openGraph: {
     title: "押田竜太 / RyuWorks",
     description:
       "毎日くり返している手作業を、やらなくていい形にします。宮崎県／畜産の現場に18年。",
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: "押田竜太 / RyuWorks｜畜産の現場に18年 × AI開発",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "押田竜太 / RyuWorks",
+    description:
+      "毎日くり返している手作業を、やらなくていい形にします。宮崎県／畜産の現場に18年。",
+    images: ["/ogp.png"],
   },
 };
 
