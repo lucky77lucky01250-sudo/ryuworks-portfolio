@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "押田竜太 / RyuWorks｜毎日くり返している手作業を、やらなくていい形にします",
   description:
     "宮崎県で畜産の現場に18年。現場を知ったうえで、LINE・Slack・Googleと業務をつなぐ仕組みを自分で作ります。自作の繁殖管理アプリは県内の畜産農家で稼働中。",
-  metadataBase: new URL("https://ryuworks-portfolio.vercel.app"),
+  metadataBase: new URL("https://ryuoshida.com"),
   openGraph: {
     title: "押田竜太 / RyuWorks",
     description:
