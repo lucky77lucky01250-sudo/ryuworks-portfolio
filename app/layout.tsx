@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: "/ogp.png",
         width: 1200,
         height: 630,
-        alt: "押田竜太 / RyuWorks｜畜産の現場に18年 × AI開発",
+        alt: "押田竜太 / RyuWorks｜2008年から畜産の現場 × AI開発",
       },
     ],
   },
