@@ -37,5 +37,53 @@ h1, h2, h3 {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 1.5rem;
+}
+
+/* 動き（CLAUDE.md「動き」の3つだけ） */
+@property --n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+.count-up {
+  --n: var(--to);
+  counter-reset: n var(--n);
+  animation: count-up 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+}
+.count-up::after {
+  content: counter(n);
+}
+@keyframes count-up {
+  from {
+    --n: 0;
+  }
+}
+.reveal {
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-waiting {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.details-body {
+  transition: grid-template-rows 0.35s ease;
+}
+.details-chevron {
+  transition: transform 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .count-up {
+    animation: none;
+  }
+  .reveal,
+  .details-body,
+  .details-chevron {
+    transition: none;
+  }
 }

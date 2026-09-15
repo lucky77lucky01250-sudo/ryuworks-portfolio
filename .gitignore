@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# デザイン案の作業ファイル（Claude Designのキャンバス用。サイトには含めない）
+/design/
