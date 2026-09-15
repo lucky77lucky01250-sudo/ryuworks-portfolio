@@ -31,7 +31,9 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { rootMargin: "0px 0px -8% 0px" },
+      // 上側を大きく広げる：ページ内リンクで一気に飛び越えたカードも「通過した」とみなして出す
+      // （広げないと、画面に一度も入らなかったカードが消えたまま残る）
+      { rootMargin: "99999px 0px -8% 0px" },
     );
     // 画面の下にあるうちに隠しておく（見えていないので、ちらつかない）
     const frame = requestAnimationFrame(() => {
