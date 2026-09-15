@@ -300,7 +300,7 @@ export default function Home() {
                 href="#works"
                 className="rounded border border-accent px-7 py-3.5 text-center font-bold text-accent"
               >
-                実際に動いているものを見る
+                作ったものを見る
               </a>
             </div>
           </div>
