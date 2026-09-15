@@ -1,6 +1,6 @@
 # ポートフォリオサイト（RyuWorks）
 
-**公開URL: https://ryuworks-portfolio.vercel.app**（2026-09-06 公開）
+**公開URL: https://ryuoshida.com**（2026-09-06 公開 / 2026-09-09 独自ドメインへ移行）
 main に push すると Vercel が自動デプロイする。
 
 押田竜太 / RyuWorks のポートフォリオ。1ページ完結。
