@@ -193,7 +193,7 @@ function LiveWorkCard({ work }: { work: Work }) {
   );
 }
 
-/** 第2部：講座の課題 */
+/** 第2部：業種別のモデルケース */
 function CaseWorkCard({ work }: { work: Work }) {
   return (
     <article
@@ -368,8 +368,8 @@ export default function Home() {
         <section className="mt-16 sm:mt-24">
           <Reveal>
             <SectionHeading
-              label="講座の課題として制作したもの"
-              note="実際の依頼ではなく、想定した困りごとをもとに一から実装したものです。仕組みはすべて動く状態で作っています。"
+              label="業種別のモデルケース"
+              note="実際のご依頼ではなく、よくある困りごとを想定して一から作り、動かして確かめたものです。"
             />
           </Reveal>
           <div className="grid gap-4 md:grid-cols-2">
