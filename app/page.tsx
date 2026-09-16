@@ -410,16 +410,27 @@ export default function Home() {
               ))}
             </ul>
 
-            <div className="mt-7 border-t border-line pt-4">
-              <p className="text-lg font-bold">
-                {profile.name}
-                <span className="ml-2 text-sm font-normal text-muted">
-                  {profile.reading}
-                </span>
-              </p>
-              <p className="mt-0.5 text-sm text-muted">
-                {profile.brand}／{profile.area}　{profile.availability}
-              </p>
+            <div className="mt-7 flex items-center gap-4 border-t border-line pt-5">
+              <Image
+                src={profile.portrait.src}
+                alt={profile.portrait.alt}
+                width={480}
+                height={480}
+                className="h-20 w-20 shrink-0 rounded-full border border-line sm:h-24 sm:w-24"
+                sizes="96px"
+              />
+              <div>
+                <p className="text-lg font-bold">
+                  {profile.name}
+                  <span className="ml-2 text-sm font-normal text-muted">
+                    {profile.reading}
+                  </span>
+                </p>
+                <p className="mt-0.5 text-sm text-muted">
+                  {profile.brand}／{profile.area}
+                </p>
+                <p className="text-sm text-muted">{profile.availability}</p>
+              </div>
             </div>
           </section>
         </Reveal>

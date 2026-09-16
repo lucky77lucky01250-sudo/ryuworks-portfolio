@@ -296,6 +296,11 @@ export const profile = {
   reading: "おしだ りゅうた",
   brand: "RyuWorks",
   area: "宮崎県",
+  /** 写真を元にした似顔絵（写真そのものは載せない） */
+  portrait: {
+    src: "/portrait.jpg",
+    alt: "押田竜太の似顔絵。つば広の帽子をかぶって笑っている",
+  },
   availability: "平日の早朝と夜、土日を中心に対応しています。",
 };
 
