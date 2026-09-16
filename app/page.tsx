@@ -356,7 +356,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading
               label={"自分で作って、\n実際に使われているもの"}
-              note="自分の業務のために作り、いまも動いているものです。"
+              note="自分や身近な現場のために作り、いまも動いているものです。"
             />
           </Reveal>
           <div className="space-y-5">
