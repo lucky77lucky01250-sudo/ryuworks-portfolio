@@ -410,6 +410,28 @@ export default function Home() {
               ))}
             </ul>
 
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              <div>
+                <h3 className="font-bold">好きなこと</h3>
+                <dl className="mt-2 space-y-2.5 text-[15px]">
+                  {why.likes.map((l) => (
+                    <div key={l.title}>
+                      <dt className="font-medium text-accent">{l.title}</dt>
+                      <dd className="text-muted">{l.body}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <div>
+                <h3 className="font-bold">これからやっていきたいこと</h3>
+                <div className="mt-2 space-y-2 text-[15px]">
+                  {why.future.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <div className="mt-7 flex items-center gap-4 border-t border-line pt-5">
               <Image
                 src={profile.portrait.src}
