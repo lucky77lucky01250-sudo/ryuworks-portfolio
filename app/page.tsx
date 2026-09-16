@@ -16,6 +16,7 @@ import {
 import Reveal from "./components/Reveal";
 import CountUp from "./components/CountUp";
 import WorkDetails from "./components/WorkDetails";
+import Scenery from "./components/Scenery";
 
 function ArrowIcon() {
   return (
@@ -340,6 +341,9 @@ export default function Home() {
                   >
                     <h3 className="font-bold">{c.title}</h3>
                     <p className="mt-1.5 text-sm text-muted">{c.body}</p>
+                    <p className="mt-2 border-t border-line pt-2 text-sm font-medium text-accent">
+                      {c.forWhom}
+                    </p>
                   </a>
                 </li>
               ))}
@@ -384,6 +388,7 @@ export default function Home() {
         {/* なぜ作るのか */}
         <Reveal className="mt-20 sm:mt-28">
           <section id="why" className="max-w-3xl scroll-mt-20">
+            <Scenery className="mb-8 w-full text-accent" />
             <SectionHeading label={why.heading} />
             <p className="whitespace-pre-line text-[19px] font-bold leading-[1.7] text-accent sm:text-[22px]">
               {why.lead}
@@ -393,7 +398,19 @@ export default function Home() {
                 <p key={p}>{p}</p>
               ))}
             </div>
-            <div className="mt-6 border-t border-line pt-4">
+            <ul className="mt-7 grid gap-3 sm:grid-cols-3">
+              {why.values.map((v) => (
+                <li
+                  key={v.title}
+                  className="rounded-lg border border-line bg-card px-4 py-3.5"
+                >
+                  <h3 className="text-[15px] font-bold text-accent">{v.title}</h3>
+                  <p className="mt-1 text-sm text-muted">{v.body}</p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-7 border-t border-line pt-4">
               <p className="text-lg font-bold">
                 {profile.name}
                 <span className="ml-2 text-sm font-normal text-muted">
