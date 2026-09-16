@@ -412,6 +412,14 @@ export default function Home() {
 
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               <div>
+                <Image
+                  src={why.likesImage.src}
+                  alt={why.likesImage.alt}
+                  width={720}
+                  height={540}
+                  className="mb-3 w-full rounded-lg"
+                  sizes="(max-width: 640px) 100vw, 360px"
+                />
                 <h3 className="font-bold">好きなこと</h3>
                 <dl className="mt-2 space-y-2.5 text-[15px]">
                   {why.likes.map((l) => (
@@ -423,6 +431,14 @@ export default function Home() {
                 </dl>
               </div>
               <div>
+                <Image
+                  src={why.futureImage.src}
+                  alt={why.futureImage.alt}
+                  width={720}
+                  height={540}
+                  className="mb-3 w-full rounded-lg"
+                  sizes="(max-width: 640px) 100vw, 360px"
+                />
                 <h3 className="font-bold">これからやっていきたいこと</h3>
                 <div className="mt-2 space-y-2 text-[15px]">
                   {why.future.map((p) => (
