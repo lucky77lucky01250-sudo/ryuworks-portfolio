@@ -116,14 +116,13 @@ export const liveWorks: Work[] = [
     result:
       "宮崎県内の繁殖農家2戸に導入しました。発情の見逃しと分娩事故を減らすことが目的で、パソコン管理からの時間短縮も伴いますが、本当の効果は経営面にあります。発情を1回見逃せば分娩は3週間遅れ、それがそのまま1頭あたりの年間収益に響くためです。",
     tech: "Next.js / TypeScript / Supabase / Vercel（PWA）",
+    video: {
+      src: "/videos/hanshoku.mp4",
+      poster: "/videos/hanshoku-poster.jpg",
+      caption:
+        "牛を1頭登録するところ（入力の途中は速送り）。授精日を入れると妊娠鑑定の予定日が自動で出ます。動作確認用のアカウントで撮影しています",
+    },
     images: [
-      {
-        src: "/hanshoku-list.jpg",
-        alt: "繁殖牛管理アプリの一覧画面。サイクル順に並び、対応が遅れている牛に警告が出ている",
-        w: 750,
-        h: 1513,
-        caption: "サイクル順に自動で並ぶ。遅れは赤で警告",
-      },
       {
         src: "/hanshoku-detail.jpg",
         alt: "繁殖牛管理アプリの詳細画面。発情確認・種付け・妊娠鑑定・分娩の進み具合が図で出ている",
