@@ -146,6 +146,12 @@ export const liveWorks: Work[] = [
     result:
       "1件5分かかっていた入力が、LINEを1行送る10〜20秒になりました。イベント案内のスクリーンショットであれば、送るだけで日時・場所・分類まで入った予定になります。毎朝の自動通知によって、予定の見落としがなくなりました。",
     tech: "LINE Messaging API / Python / Claude API（画像読み取り） / Google Calendar API / Render / cron-job.org",
+    video: {
+      src: "/videos/line.mp4",
+      poster: "/videos/line-poster.jpg",
+      caption:
+        "チラシの画像をLINEに送るところから、3件の予定がGoogleカレンダーに入るまで。動作確認用に作ったサンプルのチラシです",
+    },
     images: [
       {
         src: "/line-notify.jpg",
@@ -153,14 +159,6 @@ export const liveWorks: Work[] = [
         w: 750,
         h: 535,
         caption: "毎朝7時に自動で届く（予定名はぼかしています）",
-      },
-      {
-        src: "/line-image-register.jpg",
-        alt: "案内のチラシ画像をLINEに送ると、3件の予定が日時・場所・分類つきで登録された画面",
-        w: 1400,
-        h: 963,
-        caption:
-          "チラシ画像を1枚送ると、3件の予定に分けて登録される（動作確認用に作成したサンプルのチラシです）",
       },
     ],
   },
