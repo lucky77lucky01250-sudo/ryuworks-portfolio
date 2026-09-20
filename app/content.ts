@@ -87,6 +87,8 @@ export type Work = {
   after: string;
   /** カードに常に見えているひとこと説明 */
   summary: string;
+  /** 動いている様子の動画（15〜30秒・音なし）。無ければ表示しない */
+  video?: { src: string; poster: string; caption?: string };
   problem: string;
   built: string;
   result: string;
@@ -341,4 +343,32 @@ export const steps = {
     { title: "使い始めに付き添う", body: "最初の入力や設定を、一緒に行います。宮崎県内なら伺って隣で、県外ならオンラインで画面を見ながら進めます。" },
     { title: "使いながら直す", body: "使っている方から要望をもらい、直しながら続けます。" },
   ],
+};
+
+/** 最初の画面のすぐ下に出す短い自己紹介（長い話は「なぜ作るのか」の章） */
+export const intro = {
+  lead: "宮崎県で、畜産の現場に18年います。",
+  body: [
+    "事務所のパソコンではなく、作業をしているその場で使える形にするのが得意です。自分の現場で面倒だったことを、そのまま仕組みにしてきました。",
+    "いまは繁殖管理アプリを県内の畜産農家2戸に導入し、要望をもらっては直しながら続けています。",
+  ],
+  linkLabel: "どんな人かをくわしく見る",
+};
+
+/** 特に見てほしい4作品（この順に大きく出す） */
+export const featuredIds = ["work-a1", "work-a2", "work-b2", "work-b5"];
+
+export const tools = {
+  heading: "いま使っている道具に、つなげられます",
+  note: "新しいツールを覚え直す必要はありません。ふだんの道具の中で完結させます。",
+  items: [
+    { title: "LINE", body: "送るだけで予定や記録が入る。問い合わせの自動応答も" },
+    { title: "Googleカレンダー・スプレッドシート", body: "予定の登録、集計、転記の自動化" },
+    { title: "Slack", body: "いつものチャットの中で、社内の資料に質問できる" },
+    { title: "Webサイト", body: "問い合わせの一次対応を24時間" },
+    { title: "会計ソフト", body: "領収書の読み取りから、取り込める形のデータまで" },
+    { title: "スマホ（アプリの導入なし）", body: "現場でその場で記録・確認" },
+  ],
+  techLabel: "使用技術",
+  tech: "Next.js / React / TypeScript / Python / Supabase (PostgreSQL) / Tailwind CSS / Vercel / Claude API / ベクトル検索（RAG） / LINE Messaging API / Slack API / Google Apps Script / Google Calendar・Sheets API / PWA / Git・GitHub",
 };
