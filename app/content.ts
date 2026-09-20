@@ -238,6 +238,12 @@ export const caseWorks: Work[] = [
     result:
       "総務への定型質問が大幅に減ります。社員側も、聞きに行く手間と気まずさがなくなります。（1日5件 × 5分 ＝ 約25分/日。聞きに行く側の移動時間は別）",
     tech: "Python / Slack API / ベクトル検索 / Claude API",
+    video: {
+      src: "/videos/rag.mp4",
+      poster: "/videos/rag-poster.jpg",
+      caption:
+        "Slackで質問すると、資料を読んだAIが「どの資料の何ページか」つきで答えます（待ち時間は速送り）。読み込ませているのは動作確認用のサンプル文書です",
+    },
     demo: {
       label: "検証結果を見る（精度の実測値つき）",
       url: "https://case7-rag-slack.vercel.app",
