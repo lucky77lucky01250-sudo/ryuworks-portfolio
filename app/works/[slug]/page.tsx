@@ -84,7 +84,7 @@ export default async function WorkPage({
         >
           {model
             ? "モデルケース（実際のご依頼ではありません）"
-            : (work.kicker ?? "実際に使われています")}
+            : (work.kicker ?? "自分の業務で使っています")}
         </p>
 
         <h1 className="mt-3 text-[26px] font-bold leading-[1.5] sm:text-[36px]">
@@ -106,7 +106,7 @@ export default async function WorkPage({
           </div>
           <div className="rounded-lg border border-accent/40 bg-accent-soft px-5 py-4">
             <p className="text-sm font-bold text-accent">
-              {model ? "導入後" : "いま"}
+              {model ? "想定：導入後" : "いま"}
             </p>
             <p className="mt-1 text-2xl font-bold leading-snug text-accent">
               {work.after}
@@ -200,7 +200,9 @@ export default async function WorkPage({
 
         {/* 結果 */}
         <section className="mt-12">
-          <h2 className="text-xl font-bold sm:text-2xl">結果</h2>
+          <h2 className="text-xl font-bold sm:text-2xl">
+            {model ? "想定される効果" : "結果"}
+          </h2>
           <p className="mt-4 text-[15px] font-medium leading-[1.95] sm:text-base">
             {work.result}
           </p>
@@ -228,7 +230,7 @@ export default async function WorkPage({
             似たような作業で困っていませんか
           </h2>
           <p className="mt-2 text-[15px] leading-[1.9] text-muted">
-            まだ形になっていない段階のご相談で構いません。「これは自動化できるのか」を聞くだけでも大丈夫です。
+            初回のご相談は無料です。まだ形になっていない段階で構いません。費用は必ず事前にお見積りをお出しします。
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <Link

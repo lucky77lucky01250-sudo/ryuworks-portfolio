@@ -72,7 +72,7 @@ function BeforeAfter({
       </div>
       <div className="rounded-md border border-accent/40 bg-accent-soft px-3 py-2.5">
         <p className="text-xs font-bold text-accent">
-          {assumed ? "導入後" : "いま"}
+          {assumed ? "想定：導入後" : "いま"}
         </p>
         <p
           className={`font-bold leading-snug text-accent ${
@@ -137,7 +137,9 @@ function WorkBody({
         <p className="mt-1">{work.built}</p>
       </div>
       <div>
-        <p className="text-sm font-bold text-accent">結果</p>
+        <p className="text-sm font-bold text-accent">
+          {problemLabel === "想定した困りごと" ? "想定される効果" : "結果"}
+        </p>
         <p className="mt-1 font-medium">{work.result}</p>
       </div>
       {work.demo && (
@@ -166,8 +168,12 @@ function FeaturedWorkCard({ work, model }: { work: Work; model: boolean }) {
   return (
     <article
       id={work.id}
-      className={`scroll-mt-20 space-y-4 rounded-lg border bg-card p-5 sm:p-8 ${
-        work.featured ? "border-accent/40 shadow-sm" : "border-line"
+      className={`scroll-mt-20 space-y-4 rounded-lg border p-5 sm:p-8 ${
+        model
+          ? "border-dashed border-muted/50 bg-background"
+          : work.featured
+            ? "border-accent/40 bg-card shadow-sm"
+            : "border-line bg-card"
       }`}
     >
       <div
@@ -187,7 +193,7 @@ function FeaturedWorkCard({ work, model }: { work: Work; model: boolean }) {
           >
             {model
               ? "モデルケース（実際のご依頼ではありません）"
-              : (work.kicker ?? "実際に使われています")}
+              : (work.kicker ?? "自分の業務で使っています")}
           </p>
           <h3
             className={`font-bold ${
@@ -246,7 +252,7 @@ function CompactWorkCard({ work, model }: { work: Work; model: boolean }) {
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <h3 className="text-[17px] font-bold sm:text-lg">{work.title}</h3>
         <span className="text-xs font-bold text-muted">
-          {model ? "モデルケース" : "実際に使われています"}
+          {model ? "モデルケース" : (work.kicker ?? "自分の業務で使っています")}
         </span>
       </div>
       <BeforeAfter
@@ -490,12 +496,34 @@ export default function Home() {
               note="動いている様子と、何がどう変わったかを見られます。"
             />
           </Reveal>
+          <h3 className="mb-4 text-lg font-bold sm:text-xl">
+            実際に使っているもの
+          </h3>
           <div className="space-y-5">
-            {featured.map((w) => (
-              <Reveal key={w.id}>
-                <FeaturedWorkCard work={w} model={isModel(w)} />
-              </Reveal>
-            ))}
+            {featured
+              .filter((w) => !isModel(w))
+              .map((w) => (
+                <Reveal key={w.id}>
+                  <FeaturedWorkCard work={w} model={false} />
+                </Reveal>
+              ))}
+          </div>
+          <div className="mt-12 border-t border-line pt-8">
+            <h3 className="text-lg font-bold sm:text-xl">
+              モデルケース（対応できる幅を示すもの）
+            </h3>
+            <p className="mb-4 mt-2 text-sm text-muted">
+              実際のご依頼ではなく、よくある困りごとを想定して一から作り、動かして確かめたものです。数字は想定した条件での試算です。
+            </p>
+          </div>
+          <div className="space-y-5">
+            {featured
+              .filter((w) => isModel(w))
+              .map((w) => (
+                <Reveal key={w.id}>
+                  <FeaturedWorkCard work={w} model />
+                </Reveal>
+              ))}
           </div>
         </Band>
 
