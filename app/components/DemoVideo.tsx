@@ -30,6 +30,7 @@ export default function DemoVideo({
             poster={poster}
             controls
             autoPlay
+            muted
             playsInline
             className="block w-full"
           />
