@@ -293,6 +293,12 @@ export const caseWorks: Work[] = [
     result:
       "1商品30分の執筆が、確認と手直しの5分に。週10点で4時間以上が空きます。（10点 × 25分短縮 ＝ 約4時間/週）",
     tech: "Google Apps Script / Claude API / Googleスプレッドシート",
+    video: {
+      src: "/videos/blog.mp4",
+      poster: "/videos/blog-poster.jpg",
+      caption:
+        "キーワードを1行入れてメニューを実行すると、タイトル・説明文・本文の下書きがシートに書き込まれます（生成待ちは速送り）",
+    },
   },
 ];
 
