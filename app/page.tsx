@@ -219,6 +219,8 @@ function FeaturedWorkCard({ work, model }: { work: Work; model: boolean }) {
               <DemoVideo
                 src={work.video.src}
                 poster={work.video.poster}
+                headline={work.video.headline}
+                vertical={work.video.vertical}
                 alt={`${work.title}が動いている様子`}
                 caption={work.video.caption}
               />

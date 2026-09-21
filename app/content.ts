@@ -88,7 +88,14 @@ export type Work = {
   /** カードに常に見えているひとこと説明 */
   summary: string;
   /** 動いている様子の動画（15〜30秒・音なし）。無ければ表示しない */
-  video?: { src: string; poster: string; caption?: string; vertical?: boolean };
+  video?: {
+    src: string;
+    poster: string;
+    /** サムネイルに重ねる結論の一言（再生前に見える）。動画の中で実際に起きることだけを書く */
+    headline?: string;
+    caption?: string;
+    vertical?: boolean;
+  };
   /** 詳細ページに出す「どう解決するか」の流れ。無ければ詳細ページを作らない */
   flow?: { title: string; body: string }[];
   problem: string;
@@ -140,6 +147,7 @@ export const liveWorks: Work[] = [
       src: "/videos/hanshoku.mp4",
       vertical: true,
       poster: "/videos/hanshoku-poster.jpg",
+      headline: "授精日を入れるだけで、次の予定日が自動で出る",
       caption:
         "牛を1頭登録するところ（入力の途中は速送り）。授精日を入れると妊娠鑑定の予定日が自動で出ます。動作確認用のアカウントで撮影しています",
     },
@@ -190,6 +198,7 @@ export const liveWorks: Work[] = [
       src: "/videos/line.mp4",
       vertical: true,
       poster: "/videos/line-poster.jpg",
+      headline: "チラシを送るだけで、予定3件がカレンダーに入る",
       caption:
         "チラシの画像をLINEに送るところから、3件の予定がGoogleカレンダーに入るまで。動作確認用に作ったサンプルのチラシです",
     },
@@ -300,6 +309,7 @@ export const caseWorks: Work[] = [
     video: {
       src: "/videos/rag.mp4",
       poster: "/videos/rag-poster.jpg",
+      headline: "Slackで聞くと、資料名とページつきで答える",
       caption:
         "Slackで質問すると、資料を読んだAIが「どの資料の何ページか」つきで答えます（待ち時間は速送り）。読み込ませているのは動作確認用のサンプル文書で、動画の質問もその資料（IT部門の報告書）に合わせています",
     },
@@ -372,6 +382,7 @@ export const caseWorks: Work[] = [
     video: {
       src: "/videos/blog.mp4",
       poster: "/videos/blog-poster.jpg",
+      headline: "キーワード1行から、記事の下書きができる",
       caption:
         "キーワードを1行入れてメニューを実行すると、タイトル・説明文・本文の下書きがシートに書き込まれます（生成待ちは速送り）",
     },

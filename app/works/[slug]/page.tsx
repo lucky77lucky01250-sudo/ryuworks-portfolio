@@ -124,6 +124,8 @@ export default async function WorkPage({
               <DemoVideo
                 src={work.video.src}
                 poster={work.video.poster}
+                headline={work.video.headline}
+                vertical={work.video.vertical}
                 alt={`${work.title}が動いている様子`}
                 caption={work.video.caption}
               />
