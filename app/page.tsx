@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   LINE_URL,
   FORMSPREE_ID,
@@ -215,12 +216,22 @@ function FeaturedWorkCard({ work, model }: { work: Work; model: boolean }) {
           <WorkImages work={work} />
         </div>
       </div>
-      <WorkDetails>
-        <WorkBody
-          work={work}
-          problemLabel={model ? "想定した困りごと" : "困っていたこと"}
-        />
-      </WorkDetails>
+      {work.flow ? (
+        <Link
+          href={`/works/${work.id.replace("work-", "")}`}
+          className="flex min-h-11 items-center justify-between gap-3 border-t border-line pt-3 text-left text-sm font-bold text-accent"
+        >
+          この仕組みをくわしく見る（困りごと・解決の流れ・結果）
+          <span aria-hidden>→</span>
+        </Link>
+      ) : (
+        <WorkDetails>
+          <WorkBody
+            work={work}
+            problemLabel={model ? "想定した困りごと" : "困っていたこと"}
+          />
+        </WorkDetails>
+      )}
     </article>
   );
 }
