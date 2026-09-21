@@ -12,7 +12,6 @@ import {
   why,
   steps,
   profile,
-  intro,
   featuredIds,
   tools,
   type Work,
@@ -212,12 +211,18 @@ function FeaturedWorkCard({ work, model }: { work: Work; model: boolean }) {
         </div>
         <div className="space-y-3">
           {work.video ? (
-            <DemoVideo
-              src={work.video.src}
-              poster={work.video.poster}
-              alt={`${work.title}が動いている様子`}
-              caption={work.video.caption}
-            />
+            <div
+              className={
+                work.video.vertical ? "md:mx-auto md:max-w-[280px]" : ""
+              }
+            >
+              <DemoVideo
+                src={work.video.src}
+                poster={work.video.poster}
+                alt={`${work.title}が動いている様子`}
+                caption={work.video.caption}
+              />
+            </div>
           ) : null}
           <WorkImages work={work} />
         </div>
@@ -272,10 +277,29 @@ function CompactWorkCard({ work, model }: { work: Work; model: boolean }) {
   );
 }
 
-function SectionHeading({ label, note }: { label: string; note?: string }) {
+/**
+ * 章の見出し。参考サイトにならって「番号＋英字の小見出し」「大きな見出し」「短い線」の3段で、
+ * どこから新しい章が始まるかを分かりやすくする。
+ */
+function SectionHeading({
+  no,
+  en,
+  label,
+  note,
+}: {
+  no?: string;
+  en?: string;
+  label: string;
+  note?: string;
+}) {
   return (
-    <div className="mb-6 sm:mb-8">
-      <h2 className="text-[22px] font-bold sm:text-[28px]">
+    <div className="mb-8 sm:mb-10">
+      {en && (
+        <p className="text-xs font-bold tracking-[0.2em] text-accent sm:text-sm">
+          {no && <span className="mr-2">{no}</span>}— {en}
+        </p>
+      )}
+      <h2 className="mt-2 text-[24px] font-bold leading-[1.45] sm:text-[32px]">
         {label.split("\n").map((part, i) => (
           <span key={part}>
             {i > 0 && <br className="sm:hidden" />}
@@ -283,35 +307,35 @@ function SectionHeading({ label, note }: { label: string; note?: string }) {
           </span>
         ))}
       </h2>
-      {note && <p className="mt-2 text-sm text-muted">{note}</p>}
+      <span
+        aria-hidden
+        className="mt-4 block h-1 w-12 rounded-full bg-accent"
+      />
+      {note && (
+        <p className="mt-4 text-sm leading-relaxed text-muted sm:text-[15px]">
+          {note}
+        </p>
+      )}
     </div>
   );
 }
 
-/** 章の帯。背景色を交互に変えて、章の切れ目を分かるようにする */
+/** 章の帯。生成りと淡い緑を交互にして、章の切れ目を色で分かるようにする */
 function Band({
   id,
   tone = "base",
-  className = "",
   children,
 }: {
   id?: string;
-  tone?: "base" | "card" | "soft";
-  className?: string;
+  tone?: "base" | "soft";
   children: React.ReactNode;
 }) {
-  const bg =
-    tone === "card"
-      ? "bg-card"
-      : tone === "soft"
-        ? "bg-accent-soft"
-        : "bg-background";
   return (
     <section
       id={id}
-      className={`scroll-mt-16 border-t border-line ${bg} ${className}`}
+      className={`scroll-mt-16 ${tone === "soft" ? "bg-accent-soft" : "bg-background"}`}
     >
-      <div className="mx-auto w-full max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
+      <div className="mx-auto w-full max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
         {children}
       </div>
     </section>
@@ -335,11 +359,11 @@ export default function Home() {
             <span className="font-normal text-muted"> / {profile.brand}</span>
           </p>
           <nav className="flex items-center gap-7 text-sm">
+            <a href="#about" className="hidden text-muted md:inline">
+              自己紹介
+            </a>
             <a href="#works" className="hidden text-muted md:inline">
               実績
-            </a>
-            <a href="#why" className="hidden text-muted md:inline">
-              なぜ作るのか
             </a>
             <a href="#steps" className="hidden text-muted md:inline">
               進め方
@@ -355,11 +379,33 @@ export default function Home() {
       </header>
 
       <main>
-        {/* ヒーロー（動かさない。開いた瞬間に全部見えている） */}
-        <section className="mx-auto w-full max-w-5xl px-5 pb-12 pt-10 sm:px-8 sm:pb-16 sm:pt-16">
-          <div className="grid gap-10 md:grid-cols-[minmax(0,1.5fr)_minmax(0,0.7fr)] md:items-center md:gap-14">
+        {/* ヒーロー＝名前と顔から始める（誰なのかを最初に見せる）。動きはつけない */}
+        <section className="bg-background">
+          <div className="mx-auto grid w-full max-w-5xl gap-10 px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-16 md:grid-cols-[minmax(0,1.5fr)_minmax(0,0.7fr)] md:items-center md:gap-14">
             <div>
-              <h1 className="whitespace-pre-line text-[26px] font-bold leading-[1.55] sm:text-[42px]">
+              <div className="flex items-center gap-4">
+                <Image
+                  src={profile.portrait.src}
+                  alt={profile.portrait.alt}
+                  width={480}
+                  height={480}
+                  priority
+                  className="h-20 w-20 shrink-0 rounded-full border-2 border-accent/30 sm:h-24 sm:w-24"
+                  sizes="96px"
+                />
+                <div>
+                  <p className="text-xl font-bold sm:text-2xl">
+                    {profile.name}
+                    <span className="ml-2 text-sm font-normal text-muted">
+                      {profile.reading}
+                    </span>
+                  </p>
+                  <p className="mt-0.5 text-sm text-muted">
+                    {profile.brand}／{profile.area}
+                  </p>
+                </div>
+              </div>
+              <h1 className="mt-8 whitespace-pre-line text-[26px] font-bold leading-[1.55] sm:text-[42px]">
                 {hero.headline}
               </h1>
               <p className="mt-5 whitespace-pre-line text-[15px] text-muted sm:mt-7 sm:text-[17px]">
@@ -416,50 +462,97 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 自己紹介（実績より前に、どんな人かを先に伝える） */}
-        <Band tone="card">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-8">
-            <Image
-              src={profile.portrait.src}
-              alt={profile.portrait.alt}
-              width={480}
-              height={480}
-              className="h-24 w-24 shrink-0 rounded-full border border-line sm:h-32 sm:w-32"
-              sizes="128px"
-            />
-            <div>
-              <p className="text-xl font-bold sm:text-2xl">
-                {profile.name}
-                <span className="ml-2 text-sm font-normal text-muted">
-                  {profile.reading}
-                </span>
+        {/* 01 自己紹介（折りたたまず、最初から全部見せる） */}
+        <Band id="about" tone="soft">
+          <Reveal>
+            <SectionHeading no="01" en="ABOUT" label="自己紹介" />
+          </Reveal>
+          <div className="max-w-3xl">
+            <Reveal>
+              <Scenery className="mb-8 w-full text-accent" />
+              <h3 className="text-[20px] font-bold leading-[1.6] sm:text-[24px]">
+                {why.heading.replace("\n", "")}
+              </h3>
+              <p className="mt-3 whitespace-pre-line text-[17px] font-bold leading-[1.7] text-accent sm:text-[19px]">
+                {why.lead}
               </p>
-              <p className="mt-1 text-sm text-muted">
-                {profile.brand}／{profile.area}
-              </p>
-              <p className="mt-4 text-[17px] font-bold text-accent sm:text-lg">
-                {intro.lead}
-              </p>
-              <div className="mt-3 space-y-3 text-[15px] leading-[1.95] sm:text-base">
-                {intro.body.map((t) => (
-                  <p key={t}>{t}</p>
+              <div className="mt-5 space-y-4 text-[15px] leading-[1.95] sm:text-base">
+                {why.body.map((p) => (
+                  <p key={p}>{p}</p>
                 ))}
               </div>
-              <a
-                href="#why"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent"
-              >
-                {intro.linkLabel}
-                <span aria-hidden>→</span>
-              </a>
-            </div>
+            </Reveal>
+
+            <Reveal>
+              <h3 className="mt-12 text-lg font-bold sm:text-xl">
+                作るときに大切にしていること
+              </h3>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+                {why.values.map((v) => (
+                  <li
+                    key={v.title}
+                    className="rounded-lg border border-line bg-card px-4 py-3.5"
+                  >
+                    <h4 className="text-[15px] font-bold text-accent">
+                      {v.title}
+                    </h4>
+                    <p className="mt-1 text-sm text-muted">{v.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <Reveal>
+              <div className="mt-12 grid gap-8 sm:grid-cols-2">
+                <div>
+                  <Image
+                    src={why.likesImage.src}
+                    alt={why.likesImage.alt}
+                    width={720}
+                    height={540}
+                    className="mb-4 w-full rounded-lg"
+                    sizes="(max-width: 640px) 100vw, 360px"
+                  />
+                  <h3 className="text-lg font-bold">好きなこと</h3>
+                  <dl className="mt-2 space-y-2.5 text-[15px]">
+                    {why.likes.map((l) => (
+                      <div key={l.title}>
+                        <dt className="font-medium text-accent">{l.title}</dt>
+                        <dd className="text-muted">{l.body}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                <div>
+                  <Image
+                    src={why.futureImage.src}
+                    alt={why.futureImage.alt}
+                    width={720}
+                    height={540}
+                    className="mb-4 w-full rounded-lg"
+                    sizes="(max-width: 640px) 100vw, 360px"
+                  />
+                  <h3 className="text-lg font-bold">
+                    これからやっていきたいこと
+                  </h3>
+                  <div className="mt-2 space-y-2 text-[15px]">
+                    {why.future.map((p) => (
+                      <p key={p}>{p}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p className="mt-10 text-sm text-muted">{profile.availability}</p>
+            </Reveal>
           </div>
         </Band>
 
-        {/* できること */}
+        {/* 02 できること */}
         <Band>
           <Reveal>
             <SectionHeading
+              no="02"
+              en="SERVICE"
               label="できること"
               note="当てはまりそうなものを押すと、実際に作ったものへ進めます。"
             />
@@ -488,10 +581,12 @@ export default function Home() {
           </ul>
         </Band>
 
-        {/* 特に見てほしいもの */}
-        <Band id="works" tone="card">
+        {/* 03 実績 */}
+        <Band id="works" tone="soft">
           <Reveal>
             <SectionHeading
+              no="03"
+              en="WORKS"
               label="特に見てほしいもの"
               note="動いている様子と、何がどう変わったかを見られます。"
             />
@@ -508,7 +603,7 @@ export default function Home() {
                 </Reveal>
               ))}
           </div>
-          <div className="mt-12 border-t border-line pt-8">
+          <div className="mt-14">
             <h3 className="text-lg font-bold sm:text-xl">
               モデルケース（対応できる幅を示すもの）
             </h3>
@@ -527,10 +622,11 @@ export default function Home() {
           </div>
         </Band>
 
-        {/* ほかにも作ったもの */}
+        {/* 実績の続き */}
         <Band>
           <Reveal>
             <SectionHeading
+              en="MORE WORKS"
               label="ほかにも作ったもの"
               note="「モデルケース」は実際のご依頼ではなく、よくある困りごとを想定して一から作り、動かして確かめたものです。"
             />
@@ -544,90 +640,21 @@ export default function Home() {
           </div>
         </Band>
 
-        {/* なぜ作るのか */}
-        <Band id="why" tone="soft">
+        {/* 04 つなげられる道具 */}
+        <Band tone="soft">
           <Reveal>
-            <div className="max-w-3xl">
-              <Scenery className="mb-8 w-full text-accent" />
-              <SectionHeading label={why.heading} />
-              <p className="whitespace-pre-line text-[19px] font-bold leading-[1.7] text-accent sm:text-[22px]">
-                {why.lead}
-              </p>
-              <div className="mt-5 space-y-4 text-[15px] leading-[1.95] sm:text-base">
-                {why.body.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-              <ul className="mt-7 grid gap-3 sm:grid-cols-3">
-                {why.values.map((v) => (
-                  <li
-                    key={v.title}
-                    className="rounded-lg border border-line bg-card px-4 py-3.5"
-                  >
-                    <h3 className="text-[15px] font-bold text-accent">
-                      {v.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-muted">{v.body}</p>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                <div>
-                  <Image
-                    src={why.likesImage.src}
-                    alt={why.likesImage.alt}
-                    width={720}
-                    height={540}
-                    className="mb-3 w-full rounded-lg"
-                    sizes="(max-width: 640px) 100vw, 360px"
-                  />
-                  <h3 className="font-bold">好きなこと</h3>
-                  <dl className="mt-2 space-y-2.5 text-[15px]">
-                    {why.likes.map((l) => (
-                      <div key={l.title}>
-                        <dt className="font-medium text-accent">{l.title}</dt>
-                        <dd className="text-muted">{l.body}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-                <div>
-                  <Image
-                    src={why.futureImage.src}
-                    alt={why.futureImage.alt}
-                    width={720}
-                    height={540}
-                    className="mb-3 w-full rounded-lg"
-                    sizes="(max-width: 640px) 100vw, 360px"
-                  />
-                  <h3 className="font-bold">これからやっていきたいこと</h3>
-                  <div className="mt-2 space-y-2 text-[15px]">
-                    {why.future.map((p) => (
-                      <p key={p}>{p}</p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <p className="mt-7 border-t border-line pt-5 text-sm text-muted">
-                {profile.name}（{profile.brand}／{profile.area}）　
-                {profile.availability}
-              </p>
-            </div>
-          </Reveal>
-        </Band>
-
-        {/* いま使っている道具につなげられます */}
-        <Band tone="card">
-          <Reveal>
-            <SectionHeading label={tools.heading} note={tools.note} />
+            <SectionHeading
+              no="04"
+              en="TOOLS"
+              label={tools.heading}
+              note={tools.note}
+            />
           </Reveal>
           <ul className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             {tools.items.map((t) => (
               <li key={t.title}>
                 <Reveal className="h-full">
-                  <div className="h-full rounded-lg border border-line bg-background px-4 py-3.5">
+                  <div className="h-full rounded-lg border border-line bg-card px-4 py-3.5">
                     <h3 className="text-[15px] font-bold text-accent">
                       {t.title}
                     </h3>
@@ -637,15 +664,20 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p className="mt-5 border-t border-line pt-4 text-xs leading-relaxed text-muted">
+          <p className="mt-6 text-xs leading-relaxed text-muted">
             {tools.techLabel}：{tools.tech}
           </p>
         </Band>
 
-        {/* 進め方 */}
+        {/* 05 進め方 */}
         <Band id="steps">
           <Reveal>
-            <SectionHeading label={steps.heading} note={steps.note} />
+            <SectionHeading
+              no="05"
+              en="FLOW"
+              label={steps.heading}
+              note={steps.note}
+            />
           </Reveal>
           <ol className="grid gap-3 md:grid-cols-4">
             {steps.items.map((s, i) => (
@@ -666,17 +698,19 @@ export default function Home() {
           </ol>
         </Band>
 
-        {/* 相談する */}
-        <Band id="contact" tone="card">
+        {/* 06 相談する */}
+        <Band id="contact" tone="soft">
           <div className="grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-start md:gap-14">
             <SectionHeading
+              no="06"
+              en="CONTACT"
               label="相談する"
-              note="まだ形になっていない段階のご相談で構いません。「これは自動化できるのか」を聞くだけでも大丈夫です。"
+              note="初回のご相談は無料です。まだ形になっていない段階で構いません。「これは自動化できるのか」を聞くだけでも大丈夫です。"
             />
 
             <div className="space-y-5">
               {hasLine && (
-                <div className="rounded-lg border border-accent/40 bg-accent-soft p-5 sm:p-7">
+                <div className="rounded-lg border border-accent/40 bg-card p-5 sm:p-7">
                   <h3 className="font-bold">LINEで送る（いちばん早いです）</h3>
                   <p className="mt-2 text-[15px] text-muted">
                     友だち追加して、そのままトークにお送りください。
@@ -746,10 +780,12 @@ export default function Home() {
         </Band>
       </main>
 
-      <footer className="mx-auto max-w-5xl border-t border-line px-5 pb-10 pt-6 text-xs text-muted sm:px-8">
-        <p>
-          {profile.name}／{profile.brand}（{profile.area}）
-        </p>
+      <footer className="bg-background">
+        <div className="mx-auto max-w-5xl border-t border-line px-5 pb-10 pt-6 text-xs text-muted sm:px-8">
+          <p>
+            {profile.name}／{profile.brand}（{profile.area}）
+          </p>
+        </div>
       </footer>
     </>
   );

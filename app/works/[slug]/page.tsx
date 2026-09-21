@@ -118,7 +118,9 @@ export default async function WorkPage({
         {work.video && (
           <section className="mt-12">
             <h2 className="text-xl font-bold sm:text-2xl">動いている様子</h2>
-            <div className="mt-4">
+            <div
+              className={`mt-4 ${work.video.vertical ? "md:mx-auto md:max-w-[340px]" : ""}`}
+            >
               <DemoVideo
                 src={work.video.src}
                 poster={work.video.poster}
